@@ -35,6 +35,7 @@ public:
 		if(nodeVisited[node] == true) return;
 
 		nodeVisited[node] = true;
+		cout << node << " ";
 		for (i = adjacnyList[node].begin(); i != adjacnyList[node].end(); ++i) {
 			if (!nodeVisited[*i]) {
 				baseDFS(*i);
