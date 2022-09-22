@@ -11,7 +11,7 @@ private:
 
 		cout << node << " ";
 		list<int>::iterator i;
-		for (i = adjacnyList[node].begin(); i != adjacnyList[node].end(); ++i) {
+		for (auto i = adjacnyList[node].begin(); i != adjacnyList[node].end(); ++i) {
 			if (!nodeVisited[*i]) {
 				DFSUtils(*i);
 			}
@@ -29,18 +29,28 @@ public:
 		for (auto i : adjacnyList)
 			if (nodeVisited[i.first] == false)
 				DFSUtils(i.first);
+		clearNodeVisited();		
 	}
 
-	void baseDFS(int node){
+	void baseDFSUtils(int node){
 		if(nodeVisited[node] == true) return;
 
 		nodeVisited[node] = true;
 		cout << node << " ";
-		for (i = adjacnyList[node].begin(); i != adjacnyList[node].end(); ++i) {
+		for (auto i = adjacnyList[node].begin(); i != adjacnyList[node].end(); ++i) {
 			if (!nodeVisited[*i]) {
-				baseDFS(*i);
+				baseDFSUtils(*i);
 			}
 		}
+	}
+	
+	void baseDFS(int node){
+	    baseDFSUtils(node);
+	    clearNodeVisited();
+	}
+	
+	void clearNodeVisited(){
+	    nodeVisited.clear();
 	}
 };
 
@@ -53,8 +63,9 @@ int main() {
 	g.addEdge(2, 3);
 	g.addEdge(9, 3);
 
-	cout << "Following is Depth First Traversal (starting from vertex 2) \n";
+	cout << "Following is Depth First Traversal \n";
 	g.DFS();
-	g.baseDFS();
+	cout << "\n Following is Depth First Traversal with base case \n";
+	g.baseDFS(2);
 	return 0;
 }
