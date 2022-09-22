@@ -30,6 +30,17 @@ public:
 			if (nodeVisited[i.first] == false)
 				DFSUtils(i.first);
 	}
+
+	void baseDFS(int node){
+		if(nodeVisited[node] == true) return;
+
+		nodeVisited[node] = true;
+		for (i = adjacnyList[node].begin(); i != adjacnyList[node].end(); ++i) {
+			if (!nodeVisited[*i]) {
+				baseDFS(*i);
+			}
+		}
+	}
 };
 
 int main() {
@@ -43,6 +54,6 @@ int main() {
 
 	cout << "Following is Depth First Traversal (starting from vertex 2) \n";
 	g.DFS();
-
+	g.baseDFS();
 	return 0;
 }
